@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;600&display=swap');
+
+@import 'tailwindcss';
+
+[data-theme='light'] {
+  --p: #fff;
+  --pc: #0d1a3b;
+  --s: #edeaf4;
+  --sc: #0d1a3b;
+  --tc: #6b7c93;
+  --a: #5565e8;
+  --n: #0d1a3b;
+
+  --b: #dfdcdc;
+  --marquee: #dbe3f7;
+
+  /* for logo */
+  --gradient-start: #5565e8;
+  --gradient-mid: #18f2e5;
+  --gradient-end: #dbe3f7;
+}
+
+[data-theme='dark'] {
+  --font-family: 'Inter', sans-serif;
+  --p: #0b0b0f; /* deep warm black */
+  --pc: #f4f4f5; /* clean, soft white */
+  --s: #1a1a1f; /* slightly lifted dark for contrast blocks */
+  --sc: #f97316; /* soft orange for buttons/headings */
+  --tc: #cbd5e1; /* muted grey-blue for body text */
+  --a: #f59e0b; /* warm amber accent (less red than before) */
+  --n: #fef3c7; /* pale yellow for highlights if needed */
+  --b: #27272a; /* dark grey border */
+  --marquee: #1a1a1f;
+
+  --gradient-start: #f59e0b;
+  --gradient-mid: #f97316;
+  --gradient-end: #fb923c;
+}
+
+[data-theme='aqua'] {
+  --p: #345da7;
+  --pc: #d4deef;
+
+  --s: #130b43;
+  --sc: #5565e8;
+  --tc: #d4deef;
+  --a: #38ccb2;
+  --n: #fff;
+  --b: #1e2d3d;
+  --marquee: #062b48;
+
+  /* for logo */
+  --gradient-start: #00c1d4;
+  --gradient-mid: #18f2e5;
+  --gradient-end: #ff6f61;
+}
+
+[data-theme='retro'] {
+  --p: #fff3e0;
+  --pc: #6d4c41;
+  --s: #e4d8b4;
+  --sc: #5d4037;
+  --tc: #8c6b5e;
+  --a: #f35248;
+  --n: #6d4c41;
+
+  --b: #ffe0b2;
+  --marquee: #ffcc80;
+
+  /* for logo */
+  --gradient-start: #ffab40;
+  --gradient-mid: #f8d5a0;
+  --gradient-end: #6d4c41;
+}
+
+@theme {
+  --color-primary: var(--p);
+  --color-primary-content: var(--pc);
+  --color-secondary: var(--s);
+  --color-secondary-content: var(--sc);
+  --color-tertiary-content: var(--tc);
+  --color-accent: var(--a);
+  --color-neutral: var(--n);
+  --color-border: var(--b);
+  --color-marquee: var(--marquee);
+  --color-tag: #ffa800;
+
+  --animate-fade-in: fade-in 0.5s ease-out 1;
+  --animate-blink: blink 0.8s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.3s ease-out 1;
+
+  /* --background-image-large-glow: url('../assets/images/bg-lg.svg');
+  --background-image-small-glow: url('../assets/images/bg-sm.svg'); */
+  --background-image-skill-gradient: linear-gradient(to right, var(--p), #062b48, var(--p));
+
+  --background-position-large-glow-position: 110% 30%;
+  --background-position-small-glow-position: 50% 600%;
+
+  --font-fira-code: Fira Code, monospace;
+  --font-inter: Inter, sans-serif;
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes fade-up {
+    0% {
+      top: 5px;
+    }
+    100% {
+      top: 0px;
+    }
+  }
+
+  /* ===== NEW SERVICECARD ANIMATIONS ===== */
+  @keyframes gradient-x {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes subtle-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+/* ===== SERVICECARD ANIMATION UTILITIES ===== */
+.animate-gradient-x {
+  animation: gradient-x 3s ease infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-subtle-pulse {
+  animation: subtle-pulse 2s ease-in-out infinite;
+}
+
+html {
+  scroll-behavior: smooth !important;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+body {
+  font-family: var(--font-family);
+  font-optical-sizing: auto;
+  font-style: normal;
+
+  @apply bg-primary text-white;
+}
+
+.rehype-code-title {
+  @apply text-primary-content rounded-t-md bg-[#05101a] px-6 py-3 text-sm font-medium;
+}
+
+h2,
+h3 {
+  scroll-margin-top: 5.25rem;
+}
+
+section {
+  scroll-margin-top: 1.5rem;
+}
+
+/* Safari-only */
+@supports (-webkit-hyphens: none) {
+  * {
+    scroll-margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  h2,
+  h3 {
+    scroll-margin-top: 1.5rem;
+  }
+}
+
+.hide-scrollbar {
+  -webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+}
